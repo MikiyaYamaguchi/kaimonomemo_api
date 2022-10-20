@@ -4,7 +4,7 @@ const router = express.Router();
 const pool = require("../db/pool");
 
 router.get("/test/", function (req, res, next) {
-  pool.query("SELECT * FROM share_urls", [id], function (error, result) {
+  pool.query("SELECT * FROM share_urls", function (error, result) {
     if (error) {
       throw error;
     }
