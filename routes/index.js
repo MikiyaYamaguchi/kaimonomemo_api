@@ -3,6 +3,10 @@ const router = express.Router();
 
 const pool = require("../db/pool");
 
+router.get("/test/", function (req, res, next) {
+  alert("APIが実行されました。");
+});
+
 router.get("/:id", function (req, res, next) {
   const id = req.params.id;
   pool.query(
