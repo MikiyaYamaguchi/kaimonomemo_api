@@ -3,17 +3,6 @@ const router = express.Router();
 
 const pool = require("../db/pool");
 
-router.get("/test/", function (req, res, next) {
-  pool.query("SELECT * FROM share_urls", function (error, result) {
-    if (error) {
-      throw error;
-    }
-    res.status(200).json({
-      data: result.rows,
-    });
-  });
-});
-
 router.get("/:id", function (req, res, next) {
   const id = req.params.id;
   pool.query(
