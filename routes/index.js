@@ -22,7 +22,6 @@ router.get("/:id", function (req, res, next) {
 router.post("/:id", function (req, res, next) {
   const id = req.params.id;
   const kaimono_data = JSON.stringify(req.body);
-  console.log(kaimono_data);
   pool.query(
     "INSERT INTO share_urls VALUES ($1, $2, current_timestamp)",
     [id, kaimono_data],
@@ -36,6 +35,16 @@ router.post("/:id", function (req, res, next) {
       res.status(201).json({
         status: "success",
       });
+    }
+  );
+});
+
+router.delete("/data_delete/", function (req, res, next) {
+  pool.query(
+    "DELETE FROM share_urls WHERE registration_time <= cast(now() - interval '1 day' as timestamp)",
+    function (error, result) {
+      if (error) throw error;
+      console.log(`${result.rowCount}件のデータを削除しました。`);
     }
   );
 });
